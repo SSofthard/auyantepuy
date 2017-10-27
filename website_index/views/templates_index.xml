@@ -1,0 +1,97 @@
+<openerp>
+    <data>
+
+    <template id="assets_website_index" inherit_id="website.assets_frontend" name="website_index assets" >
+        <xpath expr="/t" position="inside">
+            <script type="text/javascript" src="/website_index/static/src/js/cambio_body.js"/>
+        </xpath>
+    </template>
+
+    <template id="website_index.index" name="Index">
+        <t t-call="website.layout_auyantepuy">
+            <div id="wrap" style="height:350px">
+                <h2>
+                    <div id="network" class="row hidden-xs hidden-sm col-md-offset-12 col-xl-offset-12"> 
+                        <a t-att-href="website.social_facebook" t-if="website.social_facebook"><i class="fa fa-facebook-square"/></a>
+                        <a t-att-href="website.social_twitter" t-if="website.social_twitter"><i class="fa fa-twitter"/></a>
+                        <a t-att-href="website.social_linkedin" t-if="website.social_linkedin"><i class="fa fa-linkedin"/></a>
+                        <a t-att-href="website.social_youtube" t-if="website.social_youtube"><i class="fa fa-youtube-play"/></a>
+                        <a t-att-href="website.social_googleplus" t-if="website.social_googleplus"><i class="fa fa-google-plus-square"/></a>
+                        <a t-att-href="website.social_github" t-if="website.social_github"><i class="fa fa-github"/></a>
+                    </div>
+                </h2>
+               
+                <div id="wrap_content_sm" class="row visible-md"/>
+                <div id="wrap_content_xl" class="row hidden-xs hidden-sm hidden-md"/>
+                <div id="wrap_index" class="row visible-xs visible-sm">
+                    <a href="/" class="navbar-brand img-responsive logo_index">
+                       <img src="/website_index/static/src/img/auyantepuy/auyantepuy_logo.png"/>
+                    </a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+<!--   
+
+Template de vista de correo de verificación de registro de nuevo usuario enviado.
+
+ -->
+
+<template id="mail_index" name="Confirmación registro">
+    <t t-call="website.layout_auyantepuy">
+      <div id="wrap">
+        <div class="oe_structure"/>
+        <div class="container fondo_container">
+            <h1 style="margin-left: 50px">Gracias por registrarse!</h1>
+            <div class="row">
+                <div class="col-md-12" style="margin-bottom: 185px">
+                    <div class="alert alert-success" style="width: 800px; margin-left: 15%; margin-top: 50px">
+                        Se ha enviado un mensaje al correo administrado para la verificación de su cuenta.
+                    </div>
+                    <p class="mt64" style="margin-left: 50px">
+                        Si presenta alguna duda, problema o sugerencia puede comunicarse con nosotros a través de las siguientes vías:
+                    </p>
+                    <ul class="list-unstyled" style="margin-left: 50px">
+                        <li><i class="fa fa-phone"></i> : <span t-field="res_company.phone"/></li>
+                        <li><i class="fa fa-envelope"></i> : <span t-field="res_company.email"/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+    </t>
+</template>
+
+<!--
+    Template respuesta para reset password
+-->
+
+<template id="mail_reset_password" name="Confirmación envío de reseteo contraseña">
+    <t t-call="website.layout_auyantepuy">
+      <div id="wrap">
+        <div class="oe_structure"/>
+        <div class="container fondo_container">
+            <h1 style="margin-left: 50px">Envío de correo de recuperación de contraseña exitoso.</h1>
+            <div class="row">
+                <div class="col-md-12" style="margin-bottom: 185px">
+                    <div class="alert alert-success" style="width: 800px; margin-left: 15%; margin-top: 50px">
+                        Se ha enviado un mensaje al correo administrado para la recuperación de su contraseña.
+                    </div>
+                    <p class="mt64" style="margin-left: 50px">
+                        Si presenta alguna duda, problema o sugerencia puede comunicarse con nosotros a través de las siguientes vías:
+                    </p>
+                    <ul class="list-unstyled" style="margin-left: 50px">
+                        <li><i class="fa fa-phone"></i> : <span t-field="res_company.phone"/></li>
+                        <li><i class="fa fa-envelope"></i> : <span t-field="res_company.email"/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+    </t>
+</template>
+
+
+    </data>
+</openerp>

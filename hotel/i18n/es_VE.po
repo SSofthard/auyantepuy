@@ -1,0 +1,982 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* hotel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-09 13:00+0000\n"
+"PO-Revision-Date: 2013-10-09 18:33+0530\n"
+"Last-Translator: Anil Kesariya <a.kesariya.serpentcs@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_open_hotel_folio1_form_tree_all
+msgid "Generate Folio"
+msgstr "Generar Folio"
+
+#. module: hotel
+#: help:hotel.folio,room_lines:0
+msgid "Hotel room reservation detail."
+msgstr "Hotel sala detalle reserva."
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Recreate Procurement"
+msgstr "Recrear Adquisiciones"
+
+#. module: hotel
+#: view:hotel.services:0
+msgid "Service"
+msgstr "Servicio"
+
+#. module: hotel
+#: view:hotel.room:0
+#: model:ir.actions.act_window,name:hotel.action_hotel_room_form
+#: model:ir.model,name:hotel.model_hotel_room
+msgid "Hotel Room"
+msgstr "Habitación de Hotel"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Group By..."
+msgstr "Grupo A..."
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_action_hotel_room_amenities_view_form
+msgid "Amenities"
+msgstr "Comodidades"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Branch"
+msgstr "Rama"
+
+#. module: hotel
+#: field:hotel.floor,name:0
+msgid "Floor Name"
+msgstr "Nombre  del piso"
+
+#. module: hotel
+#: field:product.product,iscategid:0
+msgid "Is categ id"
+msgstr "Es Identificación del categ"
+
+
+msgid "categ id"
+msgstr "Categoria"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_hotel_room_amenities_type
+msgid "amenities Type"
+msgstr "Tipo comodidades"
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+msgid "Amenity rate"
+msgstr "Tasa de Servicios"
+
+#. module: hotel
+#: field:room.rent,price:0
+msgid "Room rent"
+msgstr "Alquiler de habitaciones"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Automatic Declaration"
+msgstr "Declaración automática"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Set to Draft"
+msgstr "Conjunto de Proyecto"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_hotel_service
+#: model:ir.ui.menu,name:hotel.menu_open_hotel_services_form
+msgid "Services"
+msgstr "Servicios"
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+msgid "Define supplier taxes if there any on the Amenity. "
+msgstr "Definir impuestos proveedor si hay alguna en el Servicio. "
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_amenities_type_0_product_category
+msgid "All Aminities"
+msgstr "Todos comodidades"
+
+#. module: hotel
+#: selection:hotel.folio,hotel_policy:0
+msgid "On Booking"
+msgstr "En la reserva"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+msgid "Suppliers"
+msgstr "Proveedores"
+
+#. module: hotel
+#: view:hotel.floor:0
+msgid " Hotel Floor"
+msgstr " Hotel piso"
+
+#. module: hotel
+#: help:hotel.room,floor_id:0
+msgid "At which floor the room is located."
+msgstr "¿En qué piso se encuentra la sala de."
+
+#. module: hotel
+#: report:folio.total:0
+msgid "Customer Name"
+msgstr "Nombre del cliente"
+
+#. module: hotel
+#: field:product.product,isroom:0
+msgid "Is Room"
+msgstr "Es de habitaciones"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_service_type_1_product_category
+msgid "Fixed"
+msgstr "Fijo"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_hotel_service_line
+msgid "hotel Service line"
+msgstr "línea de servicio de hotel"
+
+#. module: hotel
+#: view:hotel.room:0
+#: field:hotel.room,room_amenities:0
+msgid "Room Amenities"
+msgstr "Servicios en la habitación"
+
+#. module: hotel
+#: view:hotel.service.type:0
+#: model:ir.actions.act_window,name:hotel.open_hotel_service_type_form_tree
+#: model:ir.model,name:hotel.model_hotel_service_type
+msgid "Service Type"
+msgstr "Tipo de servicio"
+
+#. module: hotel
+#: field:hotel.folio,hotel_policy:0
+msgid "Hotel Policy"
+msgstr "Políticas del Hotel"
+
+#. module: hotel
+#: field:hotel.folio.line,order_line_id:0
+msgid "order_line_id"
+msgstr "order_line_id"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_hotel_folio
+msgid "hotel folio new"
+msgstr "Hotel de folio nuevo"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Extra Info"
+msgstr "Información complementaria"
+
+#. module: hotel
+#: model:ir.actions.act_window,name:hotel.hotel_room_category_action
+msgid "Rooms by Category"
+msgstr "Habitaciones por categoría"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "List of supplier taxes if there any on the defined room. "
+msgstr "Lista de los impuestos a los proveedores si hay alguna en la habitación definido. "
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_amenities_type_3_product_category
+msgid "Single Bed"
+msgstr "Cama individual"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_open_hotel_service_type_form_tree
+msgid "Service Types"
+msgstr "Tipos de servicios"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_amenities_type_2_product_category
+msgid "Tables"
+msgstr "Tables"
+
+#. module: hotel
+#: view:hotel.folio:0
+#: model:ir.ui.menu,name:hotel.menu_all_folio
+msgid "Folio"
+msgstr "Folio"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Recreate Invoice"
+msgstr "Recrear factura"
+
+#. module: hotel
+#: field:product.category,isamenitype:0
+msgid "Is amenities Type"
+msgstr "¿Es comodidades Tipo"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid " Room Amenities"
+msgstr "Servicios en la habitación"
+
+#. module: hotel
+#: constraint:hotel.folio:0
+msgid "You can not allocate the same room twice!"
+msgstr "No se puede asignar la misma habitación dos veces!"
+
+#. module: hotel
+#: field:hotel.folio,checkin_date:0
+#: field:hotel.folio.line,checkin_date:0
+msgid "Check In"
+msgstr "Registrarse"
+
+#. module: hotel
+#: view:hotel.folio:0
+#: field:hotel.folio,name:0
+msgid "Folio Number"
+msgstr "Número de folio"
+
+#. module: hotel
+#: model:ir.actions.act_window,name:hotel.hotel_amenity_category_action
+#: model:ir.ui.menu,name:hotel.menu_hotel_amenity_category_action
+msgid "Amenities by Category"
+msgstr "Servicios por categoría"
+
+#. module: hotel
+#: view:folio.report.wizard:0
+msgid "Print"
+msgstr "Impresión"
+
+#. module: hotel
+#: field:hotel.services,service_id:0
+msgid "Service_id"
+msgstr "Servicios"
+
+#. module: hotel
+#: field:hotel.room.amenities.type,cat_id:0
+#: field:hotel.room.type,cat_id:0
+#: field:hotel.service.type,ser_id:0
+msgid "category"
+msgstr "categoría"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Invoice Lines"
+msgstr "Líneas de facturas"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_hotel_room
+msgid "Room"
+msgstr "Habitación"
+
+#. module: hotel
+#: view:hotel.room:0
+#: selection:hotel.room,status:0
+msgid "Available"
+msgstr "Disponible"
+
+#. module: hotel
+#: report:folio.total:0
+msgid "\" To \""
+msgstr "\" To \""
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Room Status"
+msgstr "Estado de la habitación"
+
+#. module: hotel
+#: field:hotel.room.amenities,room_categ_id:0
+#: model:ir.model,name:hotel.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Manual Description"
+msgstr "Manual de Descripción"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_service_type_0_product_category
+msgid "All Services"
+msgstr "Todos los Servicios"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "---Description---"
+msgstr "---Descripción---"
+
+#. module: hotel
+#: field:hotel.folio,checkout_date:0
+#: field:hotel.folio.line,checkout_date:0
+msgid "Check Out"
+msgstr "Echa un vistazo"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "state"
+msgstr "Estado"
+
+#. module: hotel
+#: report:folio.total:0
+msgid "Folio No."
+msgstr "Folio No."
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.hotel_configuration_menu
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Total amount"
+msgstr "Cantidad total"
+
+#. module: hotel
+#: view:hotel.floor:0
+msgid " Hotel Floors"
+msgstr " Hotel Pisos"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Status"
+msgstr "Estado"
+
+#. module: hotel
+#: field:res.company,additional_hours:0
+msgid "Additional Hours"
+msgstr "Horas adicionales"
+
+#. module: hotel
+#: view:hotel.room:0
+#: field:hotel.room,room_rent_ids:0
+#: field:room.rent,rent_id:0
+msgid "Room Rent"
+msgstr "Renta de habitaciones"
+
+#. module: hotel
+#: report:folio.total:0
+msgid "From \""
+msgstr "From \""
+
+#. module: hotel
+#: field:hotel.folio,order_id:0
+msgid "order_id"
+msgstr "order_id"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Customer taxes apply on the perticular room. "
+msgstr "Impuestos de clientes se aplican en la habitación perticular. "
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Service Lines"
+msgstr "Líneas de Servicio"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Procurement"
+msgstr "Obtención"
+
+#. module: hotel
+#: field:hotel.floor,sequence:0
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_action_hotel_room_amenities_type_view_form
+msgid "Amenity Types"
+msgstr "Tipos de comodidad"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Delete"
+msgstr "Borrar"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_hotel_room_category_action
+msgid "Room by Category"
+msgstr "Habitación por categoría"
+
+#. module: hotel
+#: field:hotel.folio,duration:0
+msgid "Duration in Days"
+msgstr "Duración en Días"
+
+#. module: hotel
+#: field:hotel.room.amenities,rcateg_id:0
+msgid "Amenity Catagory"
+msgstr "Servicios Categoría"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Other data"
+msgstr "Otros datos"
+
+#. module: hotel
+#: field:hotel.room,max_child:0
+msgid "Max Child"
+msgstr "Max Niños"
+
+#. module: hotel
+#: help:hotel.folio,service_lines:0
+msgid "Hotel services detail provide to customer and it will include in main Invoice."
+msgstr "Los servicios del hotel detalle proporcionar a los clientes y se incluirá en la factura principal."
+
+#. module: hotel
+#: help:hotel.folio,duration:0
+msgid "Number of days which will automatically count from the check-in and check-out date. "
+msgstr "Número de días que contará de forma automática desde el registro de entrada y la fecha de salida. "
+
+#. module: hotel
+#: selection:hotel.folio,hotel_policy:0
+msgid "On Check In"
+msgstr "A la llegada"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Descriptions"
+msgstr "Descripción"
+
+#. module: hotel
+#: view:hotel.services:0
+msgid "Customer taxes applied on the service. "
+msgstr "Los impuestos aplicados clientes en el servicio. "
+
+#. module: hotel
+#: view:hotel.services:0
+msgid "List of supplier taxes related to the service provided by hotel. "
+msgstr "Lista de los impuestos a los proveedores relacionados con el servicio prestado por el hotel. "
+
+#. module: hotel
+#: field:folio.report.wizard,date_start:0
+msgid "Start Date"
+msgstr "fecha de inicio"
+
+#. module: hotel
+#: selection:hotel.room,status:0
+msgid "Occupied"
+msgstr "Ocupado"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_hotel_folio_line
+msgid "hotel folio1 room line"
+msgstr "línea habitación de hotel folio1"
+
+#. module: hotel
+#: field:product.category,isroomtype:0
+msgid "Is Room Type"
+msgstr "Tipo de Habitación es"
+
+#. module: hotel
+#: report:folio.total:0
+msgid "Total Collection"
+msgstr "Colección total"
+
+#. module: hotel
+#: field:product.category,isservicetype:0
+msgid "Is Service Type"
+msgstr "Tipo de servicios es"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Room Lines"
+msgstr "Líneas de habitación"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Rent(UOM)"
+msgstr "Renta(UOM)"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_hotel_services
+msgid "Hotel Services and its charges"
+msgstr "Servicios del hotel y de sus cargos"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Procurement Corrected"
+msgstr "Adquisiciones corregido"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Room Line"
+msgstr "Línea de habitaciones"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Room No"
+msgstr "Habitación No"
+
+#. module: hotel
+#: view:hotel.services:0
+msgid "Service rate"
+msgstr "La tasa de servicio"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Folios"
+msgstr "Folios"
+
+#. module: hotel
+#: view:hotel.folio:0
+#: model:ir.actions.act_window,name:hotel.open_hotel_folio1_form_tree_all
+msgid "Hotel Folio"
+msgstr "Hotel Folio"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "í"
+msgstr "í"
+
+#. module: hotel
+#: help:hotel.room,room_amenities:0
+msgid "List of room amenities. "
+msgstr "Lista de los servicios de la habitación. "
+
+#. module: hotel
+#: field:hotel.folio,room_lines:0
+#: field:hotel.folio,service_lines:0
+msgid "unknown"
+msgstr "desconocido"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Guest Name"
+msgstr "Nombre de Invitado"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Customer Taxes"
+msgstr "Clientes impuestos"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Service Line"
+msgstr "línea de servicio"
+
+#. module: hotel
+#: view:hotel.room.amenities.type:0
+#: model:ir.actions.act_window,name:hotel.action_hotel_room_amenities_type_view_form
+msgid "Hotel Room Amenities Type"
+msgstr "Tipos de comodidades"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Folio Line"
+msgstr "Folio Line"
+
+#. module: hotel
+#: model:res.groups,name:hotel.group_hotel_user
+msgid "Hotel Management / User"
+msgstr "Hotel Management / User"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_service_type_2_product_category
+msgid "Variable"
+msgstr "Variable"
+
+#. module: hotel
+#: help:hotel.folio,hotel_policy:0
+msgid "Hotel policy for payment that either the guest has to payment at booking time or check-in check-out time."
+msgstr "Política del hotel, un pago que sea el invitado tiene que pago en el momento de reserva o check-in check-out."
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Purchase Description"
+msgstr "Compra Descripción"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Compute"
+msgstr "calcular"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_hotel_room_amenities
+msgid "Room amenities"
+msgstr "Los servicios de habitación"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_type_3_product_category
+msgid "No Room"
+msgstr "No hay habitaciones"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: hotel
+#: field:hotel.service.line,service_line_id:0
+msgid "service_line_id"
+msgstr "service_line_id"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Status:"
+msgstr "Estado:"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_folio_report_wizard
+msgid "folio.report.wizard"
+msgstr "folio.report.wizard"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_amenities_type_1_product_category
+msgid "Beds"
+msgstr "Camas"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Available Rooms"
+msgstr "Habitaciones disponibles"
+
+#. module: hotel
+#: field:hotel.room,floor_id:0
+msgid "Floor No"
+msgstr "Piso No"
+
+#. module: hotel
+#: view:hotel.services:0
+#: model:ir.actions.act_window,name:hotel.action_hotel_services_form
+msgid "Hotel Services"
+msgstr "Servicios del hotel"
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+#: model:ir.actions.act_window,name:hotel.action_hotel_room_amenities_view_form
+msgid "Hotel Room Amenities"
+msgstr "Servicios Hotel habitación"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Rate:"
+msgstr "Tarifa:"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "History"
+msgstr "Historia"
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+#: model:ir.ui.menu,name:hotel.menu_amenity
+msgid "Amenity"
+msgstr "Amenidad"
+
+#. module: hotel
+#: model:ir.actions.act_window,name:hotel.open_hotel_floor_form_tree
+msgid "Floor Structure"
+msgstr "Piso Estructura"
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+msgid "List of customer taxes applied on the Amenity. "
+msgstr "Lista de los impuestos a los clientes aplicar en el Servicio. "
+
+#. module: hotel
+#: report:folio.total:0
+msgid "Net Total :-"
+msgstr "total Patrimonio Neto :-"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Related invoices"
+msgstr "Facturas relacionadas"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.hotel_management_menu
+msgid "Hotel Management"
+msgstr "Dirección Hotelera"
+
+#. module: hotel
+#: view:folio.report.wizard:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Information"
+msgstr "Información"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "-->"
+msgstr "-->"
+
+#. module: hotel
+#: field:hotel.room,product_id:0
+msgid "Product_id"
+msgstr "Product_id"
+
+#. module: hotel
+#: view:hotel.room:0
+#: model:ir.model,name:hotel.model_hotel_floor
+#: model:ir.ui.menu,name:hotel.menu_open_hotel_floor_form_tree
+msgid "Floor"
+msgstr "Piso"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_room_rent
+msgid "room.rent"
+msgstr "room.rent"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_type_0_product_category
+msgid "All Rooms"
+msgstr "Todas las habitaciones"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Create Invoice"
+msgstr "Crear factura"
+
+#. module: hotel
+#: model:ir.actions.report.xml,name:hotel.hotel_folio_details
+msgid "Folio Total"
+msgstr "Folio Total"
+
+#. module: hotel
+#: field:hotel.room,room_reservation_line_ids:0
+msgid "Room Reservation Line"
+msgstr "Habitación Reserva Línea"
+
+#. module: hotel
+#: help:res.company,additional_hours:0
+msgid "Provide the min hours value for check in checkout days, whatever the hours will be provided here based on that extra days will be calculated."
+msgstr "Proporcionar el valor min horas para el check in día de pago y envío, cualesquiera que sean las horas serán proporcionados aquí basan en que los días adicionales se calculará."
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "occupied"
+msgstr "Ocupado"
+
+#. module: hotel
+#: model:ir.actions.act_window,name:hotel.hotel_folio_wizard
+msgid "Hotel Folio Wizard"
+msgstr "Hotel Folio Asistente"
+
+#. module: hotel
+#: model:ir.model,name:hotel.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: hotel
+#: sql_constraint:hotel.folio:0
+msgid "Check in Date Should be less than the Check Out Date!"
+msgstr "Llegada la fecha debe ser menor que la fecha de salida!"
+
+#. module: hotel
+#: field:hotel.folio.line,folio_id:0
+#: field:hotel.service.line,folio_id:0
+msgid "folio_id"
+msgstr "folio_id"
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Sale Description"
+msgstr "Descripción Venta "
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_amenities_type_4_product_category
+msgid "Double Bed"
+msgstr "Cama doble"
+
+#. module: hotel
+#: field:product.product,isservice:0
+msgid "Is Service id"
+msgstr "Es Identificación del Servicio"
+
+#. module: hotel
+#: view:hotel.services:0
+msgid "Suplliers"
+msgstr "Suplliers"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_open_hotel_room_type_form_tree
+msgid "Room Types"
+msgstr "Tipos de habitación"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Untaxed amount"
+msgstr "cantidad libre de impuestos"
+
+#. module: hotel
+#: report:folio.total:0
+msgid "CheckOut"
+msgstr "echa un vistazo"
+
+#. module: hotel
+#: model:ir.actions.act_window,name:hotel.hotel_service_category_action
+#: model:ir.ui.menu,name:hotel.menu_hotel_service_category_action
+msgid "Services by Category"
+msgstr "Servicios por categoría"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Cancel Folio"
+msgstr "Cancel Folio"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Room rate"
+msgstr "Tarifa de habitación"
+
+#. module: hotel
+#: field:folio.report.wizard,date_end:0
+msgid "End Date"
+msgstr "Fecha de finalización"
+
+#. module: hotel
+#: model:res.groups,name:hotel.group_hotel_manager
+msgid "Hotel Management/ Manager"
+msgstr "Hotel Management/ Manager"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: hotel
+#: view:folio.report.wizard:0
+msgid "Folio Report"
+msgstr "Reportar Folio"
+
+#. module: hotel
+#: view:hotel.room:0
+msgid "Edit"
+msgstr "Editar"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_type_2_product_category
+msgid "Double"
+msgstr "Doble"
+
+#. module: hotel
+#: report:folio.total:0
+msgid "CheckIn"
+msgstr "registrarse"
+
+#. module: hotel
+#: field:hotel.room,max_adult:0
+msgid "Max Adult"
+msgstr "Max Adultos"
+
+#. module: hotel
+#: model:ir.actions.act_window,name:hotel.open_hotel_room_type_form_tree
+#: model:ir.model,name:hotel.model_hotel_room_type
+msgid "Room Type"
+msgstr "Tipo de Habitación"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.hotel_report_menu
+msgid "Reports"
+msgstr "Informes"
+
+#. module: hotel
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Catagory"
+msgstr "categoría"
+
+#. module: hotel
+#: field:room.rent,day:0
+msgid "Weekday"
+msgstr "día laborable"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.menu_open_hotel_room_form
+msgid "Rooms"
+msgstr "Habitaciones"
+
+#. module: hotel
+#: view:hotel.room.type:0
+msgid " Hotel Room Type"
+msgstr "Tipo Habitación de Hotel"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Invoice Corrected"
+msgstr "Factura corregido"
+
+#. module: hotel
+#: selection:hotel.folio,hotel_policy:0
+msgid "On Checkout"
+msgstr "sobre Pedido"
+
+#. module: hotel
+#: model:ir.ui.menu,name:hotel.wizard_hotel_menu
+msgid "Hotel Folio Report"
+msgstr "Reportar Hotel Folio "
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Confirm Folio"
+msgstr "Confirmar Folio"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "States"
+msgstr "Unidos"
+
+#. module: hotel
+#: model:product.category,name:hotel.hotel_room_type_1_product_category
+msgid "Single"
+msgstr "Solo"
+
+#. module: hotel
+#: field:hotel.room,status:0
+msgid "status"
+msgstr "Estado"
+
+#. module: hotel
+#: view:hotel.folio:0
+msgid "Rent"
+msgstr "Renta"
+
+#. module: hotel
+#: report:folio.total:0
+msgid "Total"
+msgstr "Total"
+
+#. module: hotel
+#: view:hotel.room:0
+#: view:hotel.room.amenities:0
+#: view:hotel.services:0
+msgid "Supplier Taxes"
+msgstr "Proveedor impuestos"
+

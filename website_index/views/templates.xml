@@ -1,0 +1,11 @@
+<openerp>
+    <data>
+        <template id="layout_registro" inherit_id="website.layout_auyantepuy" name=" Registro">
+            <xpath expr="//header//div[@ class='collapse navbar-collapse navbar-top-collapse']//li[@ class='dropdown']" position="before">
+                    <t t-if= "uid == 3 or uid == 4"> 
+                        <li><a href="#btn_registro" data-toggle="modal" data-target="#form_registro" role="menuitem">Registrarse</a></li>
+                    </t>
+            </xpath>
+        </template>
+    </data>
+</openerp>

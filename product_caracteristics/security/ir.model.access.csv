@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_website_caracteristicas_user,website_caracteristicas.user,model_website_caracteristicas,website_index.group_user_auyantepuy,1,1,1,0
+access_website_caracteristicas_manager,website_caracteristicas.manager,model_website_caracteristicas,website_index.group_admin_auyantepuy,1,1,1,1

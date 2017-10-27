@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="1">
+	#
+	# Sequences for hotel.reservation
+	#
+
+	<record model="ir.sequence.type" id="seq_type_hotel_tent_reservation">
+		<field name="name">Tent Reservation</field>
+		<field name="code">tent.reservation</field>
+	</record>
+	<record model="ir.sequence" id="seq_hotel_tent_reservation">
+		<field name="name">Tent Reservation</field>
+		<field name="code">tent.reservation</field>
+		<field name="prefix">R-CARPA/</field>
+		<field name="padding">6</field>
+	</record>
+</data>
+</openerp>

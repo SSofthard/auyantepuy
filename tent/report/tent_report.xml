@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report id="tent_tentres_details"
+			string="Tent Reservation Detail"
+			model="tent.reservation"
+			report_type="qweb-pdf"
+			file="tent.report_tentres_qweb"
+            name="tent.report_tentres_qweb"
+            menu="False"/>
+			
+		<report id="tent_checkin_details"
+			string="CheckIn Detail"
+			model="tent.reservation"
+			report_type="qweb-pdf"
+			file="tent.report_checkin_qweb"
+            name="tent.report_checkin_qweb"
+            menu="False"/>
+			
+		<report id="tent_checkout_details"
+			string="CheckOut Detail"
+			model="tent.reservation"
+			report_type="qweb-pdf"
+			file="tent.report_checkout_qweb"
+            name="tent.report_checkout_qweb"
+            menu="False"/>
+			
+		
+		<report id="tent_maxtent_details"
+			string="MaxTent Detail"
+			model="tent.reservation"
+			report_type="qweb-pdf"
+			file="tent.report_maxtent_qweb"
+            name="tent.report_maxtent_qweb"
+            menu="False"/>
+		
+	</data>
+</openerp>

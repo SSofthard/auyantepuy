@@ -1,0 +1,378 @@
+<openerp>
+    <data>
+<!--Agregar menú de pie de pagina -->
+  <template id="assets_website_index" inherit_id="website.assets_frontend" name="website_index assets" >
+            <xpath expr="/t" position="inside">
+      <link rel='stylesheet' href='/website_sale/static/src/css/website_sale.css'/>  
+      <link rel='stylesheet' href='/website_sale/static/src/css/website_mail.css'/>
+      <script type="text/javascript" src="/website_sale/static/src/js/website_sale.js"></script>       
+      <script type="text/javascript" src="/website_sale/static/src/js/website_sale_payment.js"></script>
+      <script type="text/javascript" src="/website_sale/static/src/js/website_sale_validate.js"></script>
+      <script type="text/javascript" src="/website_sale/static/src/js/website_sale_tour_buy.js"></script>
+      <script type="text/javascript" src="/website_sale/static/src/js/website_sale_tracking.js"></script>
+             
+            <link rel="stylesheet" href="/web/static/lib/jquery.ui.bootstrap/css/custom-theme/jquery-ui-1.9.0.custom.css"/>
+            <t t-call="web.jqueryui_conflict">
+                <script type="text/javascript" src="/web/static/lib/jquery.ui/js/jquery-ui-1.9.1.custom.js"></script>
+            </t>
+                <link rel="stylesheet" href="/web/static/lib/jquery.ui.timepicker/css/jquery-ui-timepicker-addon.css"/>
+                <script type="text/javascript" src="/web/static/lib/jquery.ui.timepicker/js/jquery-ui-timepicker-addon.js"></script>
+                <link rel='stylesheet' href='/website_reserva/static/src/css/website_reserva.css'/>
+                <script type="text/javascript" src="/website_reserva/static/src/js/website_reserva.js"/>
+            </xpath>
+        </template>
+        
+
+<!--
+<template id="header_footer_custom" inherit_id="website.footer_default" name="Footer News Blog Link">
+    <xpath expr="//div[@id='info']/ul" position="inside">
+        <li><a t-attf-href="/page/website_reserva.reserva">Booking</a></li>
+    </xpath>
+</template>
+-->
+
+
+<template id="header" inherit_id="website.layout_auyantepuy" name="Header Shop My Cart Link">
+  <xpath expr="//header//ul[@id='top_menu']/li" position="before">
+      <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+      <li t-att-class="'' if website_sale_order and website_sale_order.cart_quantity else 'hidden'">
+          <a href="/shop/cart">
+              <i class="fa fa-shopping-cart"></i>
+              My cart <sup t-attf-class="my_cart_quantity label label-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''"/>
+          </a>
+      </li>
+  </xpath>
+</template>
+
+
+<template id="header" inherit_id="website.layout_auyantepuy" name="Header Shop My Cart Link">
+  <xpath expr="//header//ul[@id='top_menu']/li" position="before">
+      <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+      <li t-att-class="'' if website_sale_order and website_sale_order.cart_quantity else 'hidden'">
+          <a href="/shop/cart">
+              <i class="fa fa-shopping-cart"></i>
+              My cart <sup t-attf-class="my_cart_quantity label label-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''"/>
+          </a>
+      </li>
+  </xpath>
+</template>
+
+
+
+
+
+
+
+
+
+
+<template id="reserva" name="Index">
+    <t t-call="website.layout_auyantepuy">
+        <div id="wrap">
+<!--
+            <div class="oe_structure">
+             <div class="container">
+                <div class="row">
+                        <div class="col-md-4 col-sm-4"></div>
+                        <div class="col-md-3 col-sm-3"></div>
+                </div>
+             </div>
+            </div>
+-->
+        <div class="container main-container scroll-container" >
+ 
+        <form action="/consulta/reserva" method="post" class="form-horizontal mt32" enctype="multipart/form-data">
+              
+                <div class="row mt32 mb32" >
+                    <div class="col-sm-4 col-sm-offset-4">
+                         <h4 style="font-family:monospace"><FONT color='#4d90fe'><center>Viaja y vive nuevas experiencias</center></FONT></h4>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-sm-2 col-sm-offset-2 col-sm-2-2">
+                    <select  class="form-control border_form_input"  required="True" t-attf-value="#{reserva_destino or ''}" name="reserva_destino" placeholder="Seleccione Destino">
+                    <option selected="selected">Destino > </option>
+                    <option>Hotel Arawak</option>
+                    <option>Isla Tortugas Toldos</option>
+                    <option>Isla Tortugas Carpas</option>
+                    </select>
+                    </div>
+                    <div class="col-sm-2 col-sm-2-2">
+                    <input type="text" class="form-control border_form_input date"  id="date_checkin" name="reserva_checkin" required="True"  t-attf-value="#{reserva_checkin or ''}" placeholder="LLegada >"/>
+                    </div>
+                    <div class="col-sm-2 col-sm-2-2">
+                    <input type="text" class="form-control border_form_input date"  id="date_checkout" name="reserva_checkout" required="True" change="validar()" t-attf-value="#{reserva_checkout or ''}" placeholder="Salida >" />
+                    </div>
+                    <div class="col-sm-1 col-sm-1-1">
+                    <select  class="form-control border_form_input"  required="True" t-attf-value="#{reserva_destino or ''}" name="reserva_adultos" placeholder="Adultos">
+                    <option selected="selected" value="1">Adultos > </option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    </select>
+                    </div>
+                    <div class="col-sm-1 col-sm-1-1">
+                    <select  class="form-control border_form_input"  required="True" t-attf-value="#{reserva_destino or ''}" name="reserva_ninios" placeholder="Niños">
+                    <option selected="selected" value="0">Niños > </option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    </select>
+                     </div>
+                     </div>
+                    <div class="row">
+                    <div class="col-sm-2 col-sm-offset-5">
+                    <button class="btn btn-primary btn-block border_button_input" >Buscar</button>
+                    </div>
+                </div>
+                <div class="row">
+                <div>
+                 <center><FONT color="red"><t t-esc="valid_date"/></FONT></center>
+                 </div>      
+                 </div>  
+                 
+                 <div class="row">
+                 <div>
+                 <center><FONT color="red"><t t-esc="msj_value"/></FONT></center>
+                 </div>      
+                 </div>   
+                <div class="row" t-if="hotel_data">
+                <div>
+                 <H1><center>Habitaciones</center></H1>
+                 </div>      
+                 </div>      
+                <div class="row">
+                <t t-foreach="hotel_data" t-as="value">
+                     <div class="row">
+                            <div class="col-sm-offset-2 col-md-offset-2 col-xs-offset-5">
+                            <h2><t t-esc="value.categ_id.name"/></h2>
+                            </div>
+                          </div>
+                 <div class="row">
+                     <a itemprop="url" t-att-href="'/shop/product/%s' % slug(product[value.categ_id.id])">        
+                    <div class="row jumbotron border_jumbotron col-sm-8 col-sm-offset-2" style="border-radius: 0px;">  
+                         
+                         
+                          <div class="row">
+                         <div class="col-sm-5 col-xs-offset-1 col-xs-10">
+                
+               
+                <img itemprop="image" class="img img-responsive"  t-att-src="website.image_url( value, 'image', None if product_image_big else '500x500')"/>
+                
+                        </div>
+                            <div class="col-sm-5 col-md-5 col-sm-offset-1 col-xs-12 col-xs-offset-1"> 
+                            <h4>
+                            Nro Maximo de Adultos:
+                            <t t-esc="value.max_adult"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-sm-offset-1 col-xs-12 col-xs-offset-1"> 
+                            <h4>
+                            Nro Maximo de Niños:
+                            <t t-esc="value.max_child"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>
+                            Cantidad disponible:
+                            <t t-esc="categ_cant[value.categ_id.name]"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>    
+                            Precio:
+                            <t t-esc="value.lst_price"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>    
+                            Costo total:
+                            <t t-esc="value.costo_total"/>
+                            </h4>
+                            </div>
+                </div>
+                </div>
+                </a>
+                </div>
+                </t>
+                </div>
+                
+                <div class="row" t-if="awning_data">
+                <div>
+                 <H1><center>Toldos</center></H1>
+                 </div>      
+                 </div>      
+                <div class="row">        
+                <t t-foreach="awning_data" t-as="value">
+                     <div class="row">
+                            <div class="col-sm-offset-2 col-md-offset-2 col-xs-offset-5">
+                            <h2><t t-esc="value.categ_id.name"/></h2>
+                            </div>
+                    </div>
+                    <div class="row">
+                   <a itemprop="url" t-att-href="'/shop/product/%s' % slug(awning_product[value.categ_id.id])">        
+                    <div class="row jumbotron border_jumbotron col-sm-8 col-sm-offset-2" style="border-radius: 0px;">  
+                         
+                         
+                          <div class="row">
+                         <div class="col-sm-5 col-xs-offset-1 col-xs-10">
+                
+               
+                <img itemprop="image" class="img img-responsive"  t-att-src="website.image_url( value, 'image', None if product_image_big else '500x500')"/>
+                
+                        </div>
+                            <div class="col-sm-5 col-md-5 col-sm-offset-1 col-xs-12 col-xs-offset-1"> 
+                            <h4>
+                            Nro Maximo de Adultos:
+                            <t t-esc="value.max_adult"/>
+                            </h4>
+                            </div>
+                             <div class="col-sm-5 col-md-5 col-sm-offset-1 col-xs-12 col-xs-offset-1"> 
+                            <h4>
+                            Nro Maximo de Niños:
+                            <t t-esc="value.max_child"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>
+                            Cantidad disponible:
+                            <t t-esc="categ_cant[value.categ_id.name]"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>    
+                            Precio:
+                            <t t-esc="value.lst_price"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>    
+                            Costo total:
+                            <t t-esc="value.costo_total"/>
+                            </h4>
+                            </div>
+                </div>
+                </div>
+                </a>
+                </div>
+                        </t>
+                </div>   
+                
+                <div class="row" t-if="tent_data">
+                <div>
+                 <H1><center>Carpas</center></H1>
+                 </div>      
+                 </div>      
+                <div class="row">        
+                <t t-foreach="tent_data" t-as="value">
+                     <div class="row">
+                            <div class="col-sm-offset-2 col-md-offset-2 col-xs-offset-5">
+                            <h2><t t-esc="value.categ_id.name"/></h2>
+                            </div>
+                          </div>
+                <div class="row">
+                   <a itemprop="url" t-att-href="'/shop/product/%s' % slug(tent_product[value.categ_id.id])">        
+                    <div class="row jumbotron border_jumbotron col-sm-8 col-sm-offset-2" style="border-radius: 0px;">  
+                         
+                         
+                          <div class="row">
+                         <div class="col-sm-5 col-xs-offset-1 col-xs-10">
+                
+               
+                <img itemprop="image" class="img img-responsive"  t-att-src="website.image_url( value, 'image', None if product_image_big else '500x500')"/>
+                
+                        </div>
+                            <div class="col-sm-5 col-md-5 col-sm-offset-1 col-xs-12 col-xs-offset-1"> 
+                            <h4>
+                            Nro Maximo de Adultos:
+                            <t t-esc="value.max_adult"/>
+                            </h4>
+                            </div>
+                             <div class="col-sm-5 col-md-5 col-sm-offset-1 col-xs-12 col-xs-offset-1"> 
+                            <h4>
+                            Nro Maximo de Niños:
+                            <t t-esc="value.max_child"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>
+                            Cantidad disponible:
+                            <t t-esc="categ_cant[value.categ_id.name]"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>    
+                            Precio:
+                            <t t-esc="value.lst_price"/>
+                            </h4>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12 col-xs-offset-1">
+                            <h4>    
+                            Costo total:
+                            <t t-esc="value.costo_total"/>
+                            </h4>
+                            </div>
+                </div>
+                </div>
+                </a>
+                </div>
+                        </t>
+                </div>   
+                
+                
+                
+                
+                
+             <div class="row mt32 mb32">
+                <div class="col-sm-8 col-sm-offset-2">
+                <p class="text-justify"><small>
+                La Operadora Turistica Auyantepuy, cuenta con un sistema de camping instalado en la isla de la Tortuga, con la finalidad de lanzar
+                una oferta variada dirigida a todo el publico, que dispone de servicios asociados a una serie de atractivos naturales, que permiten
+                a los usuarios insteresados en conocer y disfrutar de una de las playas mas bonitas en Venezuela, desde un concepto ecoturistico.   
+                </small></p>
+                </div>
+            </div>
+            <div class="row mt32 mb32 row-images">
+                <div class="col-sm-3 col-sm-offset-1 col-xs-4">
+                    <img id="imagen-izq" src="/website_reserva/static/src/img/camp3.png"  class="img-responsive" />
+                </div>
+                <div class="col-sm-3 col-xs-4">
+                    <img src="/website_reserva/static/src/img/torre3.png" class="img-responsive"/>
+                </div>
+                <div class="col-sm-3 col-xs-4">
+                     <img id="imagen-der" src="/website_reserva/static/src/img/bote3.png" class="img-responsive" />
+                </div>
+            </div>
+            
+
+        </form>
+        </div> 
+         </div>
+    </t>
+    
+</template>
+
+
+
+
+<template id="booking_result" name="Contact us">
+    <t t-call="website.layout_auyantepuy">
+      <div id="wrap">
+        <div class="oe_structure"/>
+        <div class="container">
+            <h1>Productos disponibles</h1>
+                      <div class="row">
+                        <t t-foreach="hotel_room_data" t-as="value">
+                            
+                            <t t-esc="value['name']"/>
+                        </t>
+                     </div>
+                </div>
+                </div>
+                </t>
+</template>
+
+    </data>
+</openerp>

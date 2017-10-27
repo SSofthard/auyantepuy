@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report id="toldo_awningres_details"
+			string="awning Reservation Detail"
+			model="toldo.reservation"
+			report_type="qweb-pdf"
+			file="toldo_reservation.report_awningres_qweb"
+            name="toldo_reservation.report_awningres_qweb"
+            menu="False"/>
+			
+		<report id="toldo_checkin_details"
+			string="CheckIn Detail"
+			model="toldo.reservation"
+			report_type="qweb-pdf"
+			file="toldo_reservation.report_checkin_qweb"
+            name="toldo_reservation.report_checkin_qweb"
+            menu="False"/>
+			
+		<report id="toldo_checkout_details"
+			string="CheckOut Detail"
+			model="toldo.reservation"
+			report_type="qweb-pdf"
+			file="toldo_reservation.report_checkout_qweb"
+            name="toldo_reservation.report_checkout_qweb"
+            menu="False"/>
+			
+		
+		<report id="toldo_maxawning_details"
+			string="Maxawning Detail"
+			model="toldo.reservation"
+			report_type="qweb-pdf"
+			file="toldo_reservation.report_maxawning_qweb"
+            name="toldo_reservation.report_maxawning_qweb"
+            menu="False"/>
+		
+	</data>
+</openerp>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="1">
+	#
+	# Sequences for awning.reservation
+	#
+
+	<record model="ir.sequence.type" id="seq_type_awning_reservation">
+		<field name="name">Awning Reservation</field>
+		<field name="code">awning.reservation</field>
+	</record>
+	<record model="ir.sequence" id="seq_awning_reservation">
+		<field name="name">Awning Reservation</field>
+		<field name="code">awning.reservation</field>
+		<field name="prefix">R-TOLDO/</field>
+		<field name="padding">6</field>
+	</record>
+</data>
+</openerp>

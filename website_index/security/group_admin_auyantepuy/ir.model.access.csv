@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_website_auyantepuy,website_auyantepuy,website.model_website,group_admin_auyantepuy,1,1,1,1
+access_website_menu_auyantepuy,web menu manager_auyantepuy,website.model_website,group_admin_auyantepuy,1,1,1,1
+access_website_ir_ui_view_auyantepuy,access_website_ir_ui_view_auyantepuy,website.model_ir_ui_view,group_admin_auyantepuy,1,1,1,1
+access_seo_public_auyantepuy,access_seo_manager_auyantepuy,website.model_website_seo_metadata,group_admin_auyantepuy,1,1,1,1
+access_seo_designer_auyantepuy,access_seo_designer_auyantepuy,website.model_website_seo_metadata,group_admin_auyantepuy,1,1,1,1

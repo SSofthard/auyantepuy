@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="toldo_reservation_wizard_form_view">
+            <field name="name">toldo.reservation.wizard.form</field>
+            <field name="model">toldo.reservation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Lista de reservaciones" version='7.0'>
+                    <group col="4">
+                        <field name="date_start" string="Desde"/>
+                        <field name="date_end" string="Hasta"/>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Cancelar" icon="gtk-cancel"/>
+                        <button name='report_checkin_detail' string="Lista de Llegadas" type="object" icon="gtk-jump-to"/>
+                        <button name='report_checkout_detail' string="Lista de Salidas" type="object" icon="gtk-redo"/>
+                        <button name='report_reservation_detail' type='object' string='Lista de Reservaciones' icon="gtk-justify-fill"/>
+                        <button name='report_maxawning_detail' string="Toldos mas Usados" type="object" icon="terp-stock_symbol-selection"/>
+                   </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_toldo_reservation_wizard"
+            model="ir.actions.act_window">
+            <field name="name">Reservation List</field>
+            <field name="res_model">toldo.reservation.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            name="Reportes de Reservaciones" 
+            action="action_toldo_reservation_wizard"
+            parent="toldo.awning_reports_menu"
+            id="wizard_res_menu"
+            sequence="28"/>
+
+    </data>
+</openerp>

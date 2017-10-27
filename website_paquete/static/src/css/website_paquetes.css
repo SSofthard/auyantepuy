@@ -1,0 +1,157 @@
+.fondo_paquetes {
+  background: white;
+  margin-left: 0px;
+}
+
+.index_paquetes {
+  padding-bottom: 40px;
+  height:355px
+}
+
+.mostaza {
+  width: 130px;
+  height: 110px;
+  margin-left: 60px;
+  margin-top: 25px;
+  text-align: right;
+  background: #F0E68C;
+  line-height: 30px;
+  padding-top: 10px;
+}
+
+.mostaza2 {
+  width: 130px;
+  height: 110px;
+  margin-left: 60px;
+  margin-top: 25px;
+  text-align: right;
+  background: #FFB733;
+  line-height: 30px;
+  padding-top: 10px;
+}
+
+.centrado_seleccion{
+  margin-left: 40px;
+  margin-top: 10px;
+  text-align: center;
+  width: 435px;
+}
+
+.videos{
+  margin-left: 40px;
+  width: 320px;
+  background:white;
+}
+
+.video_01{
+  height: 120px;
+  margin-top: 60px;
+  width: 160px;
+}
+
+.video_02{
+  height: 120px;
+  margin-top: 60px;
+  width: 160px;
+}
+
+.fila{
+  margin-left: 70px;
+}
+
+.scroll_package{
+  background-color: white;
+  height: 350px;
+  overflow: auto;
+  margin-left: 0px;
+  width: 59%;
+}
+
+.scroll_imgs{
+    max-height: 300px;
+    width: 40%;
+    overflow: auto;
+    margin-left: 20px; 
+    margin-top: 20px
+}
+
+.caracteristicas{
+  margin-left: 60px;
+  margin-top: 10px;
+  width: 395px;
+}
+
+.cambiar_color_paquete{
+  background: white;
+  border: 2px solid #6AC3FF; 
+  cursor: pointer;
+  padding: 15px 35%;
+}
+
+.cambiar_color_paquete_2{
+  background: #6AC3FF;
+  border: 2px solid #6AC3FF; 
+  cursor: pointer;
+  padding: 15px 35%;
+  color: white;
+}
+
+.word_break_paquete{
+  word-break: keep-all; 
+  width: 395px;
+}
+
+.hr_submenu_paquete1{
+    background-color: green;
+    height: 2px;
+    margin-left: 180px;
+    margin-top: -20px;
+    width: 230px;
+}
+
+.hr_submenu_paquete2{
+    background-color: yellow;
+    height: 2px;
+    margin-left: 75px;
+    margin-top: -20px;
+    width: 245px;
+}
+
+.hr_submenu_paquete3{
+    background-color: blue;
+    height: 2px;
+    margin-left: -20px;
+    margin-top: -20px;
+    width: 250px;
+}
+
+.submenu_string1{
+  width: 100%; 
+  margin-left: 40%;
+}
+
+.submenu_string2{
+  margin-left: 20%
+}
+
+.submenu_string3{
+  width: 70%
+}
+
+.tamaño_button{
+  width: 200px;
+}
+.zoom {
+    zoom: 90%;
+    }
+.img_paquetes{
+    width: 200px;
+    height: 120px;
+}  
+@media(max-width:600px){
+  .videos{
+    width:100%;
+  }
+}
+
+

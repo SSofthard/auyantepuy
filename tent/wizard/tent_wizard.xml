@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="tent_reservation_wizard_form_view">
+            <field name="name">tent.reservation.wizard.form</field>
+            <field name="model">tent.reservation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Listas de reservación" version='7.0'>
+                    <group col="4">
+                        <field name="date_start" string="Fecha de Inicio"/>
+                        <field name="date_end" string="Fecha final"/>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Cancelar" icon="gtk-cancel"/>
+                        <button name='report_checkin_detail' string="Lista de llegadas" type="object" icon="gtk-jump-to"/>
+                        <button name='report_checkout_detail' string="Lista de salidas" type="object" icon="gtk-redo"/>
+                        <button name='report_reservation_detail' type='object' string='Lista de reservaciones' icon="gtk-justify-fill"/>
+                        <button name='report_maxtent_detail' string="Máximo de carpas usadas" type="object" icon="terp-stock_symbol-selection"/>
+                   </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tent_reservation_wizard"
+            model="ir.actions.act_window">
+            <field name="name">Reservation List</field>
+            <field name="res_model">tent.reservation.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.ui.view" id="make_folio_wizard_form_view">
+            <field name="name">make.folio.wizard.form</field>
+            <field name="model">wizard.make.folio</field>
+            <field name="arch" type="xml">
+                <form string="Create Folio" version='7.0'>
+                    <separator colspan="4" string="Do you really want to create the Folio ?" />
+                    <field name="grouped" />
+                    <newline/>
+                    <footer>
+                        <button name="makeFolios" string="Create Folio" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Make Folios"
+            key2="client_action_multi"
+            res_model="wizard.make.folio"
+            src_model="tent.reservation"
+            id="act_make_folio"
+            view_mode="form" target="new"
+            view_type="form"/>
+            
+        <menuitem
+            name="Reporte de reservaciones de carpas" 
+            action="action_tent_reservation_wizard"
+            parent="tent.tent_report_menu"
+            id="wizard_res_menu"
+            sequence="28"/>
+
+    </data>
+</openerp>

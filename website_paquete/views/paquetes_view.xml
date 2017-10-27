@@ -1,0 +1,188 @@
+<openerp>
+    <data>
+    <template id="website.theme_paquete" name="Theme">
+        <link id="bootstrap_css" rel='stylesheet' href='/web/static/lib/bootstrap/css/bootstrap.css' t-ignore="true"/>
+        <link rel="stylesheet" href='/website/static/src/css/website.css' t-ignore="true"/>
+        <link rel="stylesheet" href='/website_paquete/static/src/css/website_paquetes.css' t-ignore="true"/>
+    </template>
+
+    <template id="paquetes" name="Paquetes">
+        <t t-call="website.layout_auyantepuy">
+        <link rel="stylesheet" href='/website_paquete/static/src/css/website_paquetes.css' t-ignore="true"/>
+            <div id="wrap" style="height:350px">
+                <div class="container fondo_paquetes index_paquetes">
+                    <div class="row col-xs-8 col-sm-8 col-md-8 col-lg-8 scroll_package">
+                        <div class="row col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="row col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                <div t-foreach="name_data" t-as="data">
+                                      <a t-if="searches['destino_id'] == data['destino_id'] " class="letra_blanca" t-attf-href="/paquetes?{{keep_query(destino_id=data['destino_id'])}}">
+                                    
+                                    <div  class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 mostaza2">   
+                                      
+                                            <div t-foreach="data['name']" t-as="palabra">
+                                                <t t-esc="palabra"/>
+                                            </div>
+                                    </div>
+                                     </a>
+                                    
+                                    <a t-if="searches['destino_id'] != data['destino_id'] " class="letra_blanca" t-attf-href="/paquetes?{{keep_query(destino_id=data['destino_id'])}}">
+                                    
+                                    <div  class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 mostaza2">   
+                                      
+                                            <div t-foreach="data['name']" t-as="palabra">
+                                                <t t-esc="palabra"/>
+                                            </div>
+                                       
+                                    </div>
+                                     </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-xs-4 col-sm-4 col-md-4 col-lg-4 fila">
+                            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 centrado_seleccion">
+                                <div t-foreach="product_data" t-as="product" style="margin-bottom: 45px">
+                                    <form action="/paquetes/contacto" method="post" class="form-horizontal mt32" enctype="multipart/form-data">
+                                    <a t-if="searches['product_id'] == product.id" class="cambiar_color_paquete_2" t-attf-href="/paquetes?{{keep_query('destino_id',product_id=product.id)}}">
+                                        <t t-esc="product.name"/>
+                                        
+                                         </a>
+                                         
+                                    <t t-if="searches['product_id'] == product.id">
+                                    <div id="dialog" title="Contacto reserva" class="modal fade">
+                                        <div class='modal-content col-md-4 col-md-offset-4'>
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" icon="terp-accessories-archiver" >X</button>
+                                                <h4 class="modal-title">Reserva de Paquete</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div t-attf-class="form-group #{error and 'contact_name' in error and 'has-error' or ''}">
+                                                        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 dialog_fields">
+                                                            <span>Paquete seleccionado:</span>
+                                                            <input type="text" class="form-control border_form_input dialog_forms" name="paquete_name" required="True" t-att-value="product.name"/>
+                                                        </div>
+                                                </div>
+                                                <div t-attf-class="form-group #{error and 'contact_name' in error and 'has-error' or ''}">
+                                                    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 dialog_fields">
+                                                        <p>Nombre completo:</p>
+                                                            <input type="text" class="form-control border_form_input dialog_forms" name="contact_name" placeholder="Su nombre completo" required="True" t-attf-value="#{contact_name or ''}"/>
+                                                    </div>
+                                                </div>
+                                                <div t-attf-class="form-group #{error and 'phone' in error and 'has-error' or ''}">
+                                                    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 dialog_fields">
+                                                        <p>Teléfono:</p>
+                                                        <input type="text" class="form-control border_form_input dialog_forms" name="contact_phone" placeholder="Su número telefónico" t-attf-value="#{phone or ''}"/>
+                                                    </div>
+                                                </div>
+                                                <div name="email_from_container" t-attf-class="form-group #{error and 'email_from' in error and 'has-error' or ''}">
+                                                    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 dialog_fields">
+                                                        <p>Correo electrónico:</p>
+                                                        <input type="email" class="form-control border_form_input dialog_forms" placeholder="Su correo electrónico" name="contact_email" required="True" t-attf-value="#{email_from or ''}"/>
+                                                    </div>
+                                                </div>
+                                                <div name="fecha_container" t-attf-class="form-group #{error and 'fecha' in error and 'has-error' or ''}">
+                                                    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 dialog_fields">
+                                                        <p>Fecha:</p>
+                                                        <input type="text" class="form-control border_form_input date"  id="date_checkin" name="reserva_checkin" required="True"  t-attf-value="#{reserva_checkin or ''}" placeholder="LLegada >"/>
+                                                     </div>
+                                                </div>
+                                                <div name="num_adultos" t-attf-class="form-group #{error and 'num_adultos' in error and 'has-error' or ''}">
+                                                    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 dialog_fields">
+                                                        <p>N° de adultos:</p>
+                                                        <input type="num_adultos" class="form-control border_form_input dialog_form1" name="num_adultos" required="True" t-attf-value="#{num_adultos or ''}"/>
+                                                        <p>N° de niños:</p>
+                                                        <input type="num_ninos" class="form-control border_form_input dialog_form1" name="num_ninos" required="True" t-attf-value="#{num_ninos or ''}"/>
+                                                    </div>
+                                                </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-1 col-md-11 col-sm-12 col-xs-12">
+                                                <button class="btn btn-primary">Enviar</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </t>      
+
+                                    <a t-if="searches['product_id'] != product.id" class="cambiar_color_paquete" t-attf-href="/paquetes?{{keep_query('destino_id',product_id=product.id)}}">
+                                        <t t-esc="product.name"/>
+                                    </a>
+                                    </form> 
+                                </div>
+                            </div>
+                            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="caracteristicas" t-foreach="caracteristicas_data" t-as="datas">
+                                    <div class="word_break_paquete letra_azul" t-foreach="datas.caracteristicas_ids" t-as="data">
+                                        <t t-esc="data.description"/><hr class="hr"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- Imágenes Web Auyantepuy -->
+
+                    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 scroll_imgs">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" t-foreach="imagen_data" t-as="img"> 
+                            <span t-field="img.image" class="img-responsive" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-responsive img_paquetes&quot;}"/>
+                            <br/>
+                        </div>
+                    </div>
+<!-- Modal Registro -->
+
+                    
+<!--
+                                <div id="network_paquetes" class="row hidden-xs hidden-sm col-md-offset-12 col-xl-offset-12"> 
+                                    <a t-att-href="website.social_facebook" t-if="website.social_facebook"><i class="fa fa-facebook-square"/></a>
+                                    <a t-att-href="website.social_twitter" t-if="website.social_twitter"><i class="fa fa-twitter"/></a>
+                                    <a t-att-href="website.social_linkedin" t-if="website.social_linkedin"><i class="fa fa-linkedin"/></a>
+                                    <a t-att-href="website.social_youtube" t-if="website.social_youtube"><i class="fa fa-youtube-play"/></a>
+                                    <a t-att-href="website.social_googleplus" t-if="website.social_googleplus"><i class="fa fa-google-plus-square"/></a>
+                                    <a t-att-href="website.social_github" t-if="website.social_github"><i class="fa fa-github"/></a>
+                                </div>
+                            </h2>
+-->
+                </div>
+
+
+                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 fondo_paquetes">
+                    <div class="row col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <t groups="website_index.group_user_auyantepuy,website_index.group_admin_auyantepuy,base.group_users,base.group_erp_manager">
+                        <button class="letra_blanca" style="background: green; border-radius: 20px; padding: 5px 10px; margin-left: 85%"> E </button>
+                        </t>
+                        <t groups="base.group_public">
+                        <button class="letra_blanca" style="background: green; border-radius: 20px; padding: 5px 10px; margin-left: 85%"> E </button>
+                        </t>
+                    <hr class="hr_submenu_paquete1"/>
+
+                    </div>
+                    <div class="row col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <button class="letra_blanca" style="background: yellow; border-radius: 20px; padding: 5px 13px; ; margin-left: 54%"> I </button> 
+                    <hr class="hr_submenu_paquete2"/>
+                    </div>
+                    <div class="row col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <t groups="website_index.group_user_auyantepuy,website_index.group_admin_auyantepuy,base.group_users,base.group_erp_manager">
+                        <button id="boton_abrir" class="letra_blanca" style="background: blue; border-radius: 20px; padding: 5px 10px; margin-left: 29%"> R </button>
+                        </t>
+                        <t groups="base.group_public">
+                        <button id="boton_abrir_user" class="letra_blanca" style="background: blue; border-radius: 20px; padding: 5px 10px; margin-left: 29%"> R </button>
+                        </t>
+                    <hr class="hr_submenu_paquete3"/>
+                    </div>
+                </div>
+                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 fondo_paquetes">
+                    <div class="row col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <p><h7 class="submenu_string1">EcoCamping La Tortuga</h7></p>
+                    </div>
+                    <div class="row col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <p><h7 class="submenu_string2">Isla la Tortuga</h7></p>
+                    </div>
+                    <div class="row col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <p><h7 class="submenu_string3">Reservas</h7></p>
+                    </div>
+                </div>
+            </div>
+       
+        </t>
+    </template>
+    </data>
+</openerp>

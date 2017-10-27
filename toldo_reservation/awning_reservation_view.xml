@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <openerp>
+     <data>
+<!--
+        ============================================================
+        Reservation
+        ============================================================ 
+-->
+
+        <record model="ir.ui.view" id="view_awning_reservation_form">
+            <field name="name">awning.reservation.form</field>
+            <field name="model">awning.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Reservaciones de Toldos" version="7.0">
+                    <header>
+                         <button name="confirmed_reservation" string="Confirmar" type="object" states="draft,cancel"  class="oe_highlight"/>
+                        <button name="cancel_reservation" string="Cancelar" type="object" states="draft,confirm"  class="oe_highlight"/>
+                        <button name="facturar_pagar" string="Pagar" type="object" states="confirm"  class="oe_highlight"/>
+                        <button name="pagar_reserva" string="Pagar" type="object" states="invoiced"  class="oe_highlight"/>
+                        <button name="imprimir_factura" string="Imprimir Factura" type="object" states="paid"  class="oe_highlight"/>
+                        <button name="reservation_done" string="Salida de Clientes" type="object" states="paid"  class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <label string="Reservación No"/>
+                        <h1>
+                            <field name="reservation_no" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group colspan="4" col="4">
+                                <field name="date_order" select="1" string="Fecha de Orden"/>
+                                <field name="warehouse_id" select="1" invisible="True"/>
+                            </group>
+                            <separator/>
+                            <group colspan="4" col="4">
+                                <field name="partner_id" on_change="onchange_partner_id(partner_id)" select="1" domain="[('customer','=',True)]" string="Cliente"/>
+                                <field name="pricelist_id" col="2" string="Lista de Precios"/>
+                                <field name="partner_order_id" domain="[('parent_id','=',partner_id)]"  string="Orden Contacto"/>
+                                <field name="partner_invoice_id" domain="[('parent_id','=',partner_id)]"  string="Dirección de Facturación"/>
+                                <field name="partner_shipping_id" domain="[('parent_id','=',partner_id)]"  string="Dirección de Envío"/>
+                            </group>
+                            <group colspan="4" col="4">
+                                <field name="checkin" on_change="on_change_checkin(date_order,checkin,checkout)" string="Fecha de llegada"/>
+                                <field name="checkout" on_change="on_change_checkout(checkin,checkout)" string="Fecha de salida"/>
+                                <field name="adults" string="Adultos"/>
+                                <field name="children" string="Niños" />
+                                <field name="dias_hospedaje" readonly='True' />
+                            </group>
+                            <field name="dummy" invisible="True"/>
+                            <field name="acccount_invoice_id" invisible="True"/>
+                            <field name="verificar_pago" invisible="True"/>
+                        </group>
+                        <notebook>
+                            <page string='Linea de Reservación'>
+                                <field name="reservation_line" colspan="4" nolabel="1" on_change="on_change_filter(reservation_line)"  >
+                                   
+                                    <form string="Reservation Line">
+                                        <separator string="awning Type"/>
+                                        <field name="name" invisible="1" />
+                                        <field name="categ_id" on_change="on_change_categ(categ_id, reserve, parent.checkin, parent.checkout)" widget="selection" select="1" colspan="4" nolabel="1"/>
+                                        <newline/>
+                                        <separator string="Select awning"/>
+                                        <field name="reserve" colspan="4" on_change="on_change_categ(categ_id, reserve, parent.checkin, parent.checkout)" string="awning Number" nolabel="1"></field>
+                                    </form>
+                                    <tree  string="Reservation Line">
+                                        <field name="reserve" colspan="4"  string="Toldos"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            
+                             <page string='Servicios'>
+                                <field name="service_recervation_line" string="Linea de Servicios" colspan="4" nolabel="1" >
+
+                                    <tree string="Linea de Servicios" editable="botton">
+                                        <field name="categ_id"   nolabel="1" on_change="limpiar_selector()" string="Tipo de Servicio"/>
+                                        <field name="service_id" string="Servicio" domain="[('categ_id','=',categ_id)]">
+                                        </field>
+                                        <field name="product_uom_qty"  />
+                                    </tree>
+                                </field>
+                            </page>
+<!--
+                             <page string='Huespedes'>
+                                <field name="child_ids" mode="kanban">
+                                    <kanban>
+                                        <field name="color"/>
+                                        <field name="name"/>
+                                        <field name="title"/>
+                                        <field name="email"/>
+                                        <field name="parent_id"/>
+                                        <field name="is_company"/>
+                                        <field name="function"/>
+                                        <field name="phone"/>
+                                        <field name="street"/>
+                                        <field name="street2"/>
+                                        <field name="zip"/>
+                                        <field name="city"/>
+                                        <field name="country_id"/>
+                                        <field name="mobile"/>
+                                        <field name="fax"/>
+                                        <field name="state_id"/>
+                                        <field name="has_image"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                                <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '')" style="position: relative">
+                                                    <a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
+                                                    <div class="oe_module_vignette">
+                                                    <a type="open">
+                                                        <t t-if="record.has_image.raw_value === true">
+                                                            <img t-att-src="kanban_image('res.partner', 'image_small', record.id.value)" class="oe_avatar oe_kanban_avatar_smallbox"/>
+                                                        </t>
+                                                        <t t-if="record.image and record.image.raw_value !== false">
+                                                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_avatar oe_kanban_avatar_smallbox"/>
+                                                        </t>
+                                                        <t t-if="record.has_image.raw_value === false and (!record.image or record.image.raw_value === false)">
+                                                            <t t-if="record.is_company.raw_value === true">
+                                                                <img t-att-src='_s + "/base/static/src/img/company_image.png"' class="oe_kanban_image oe_kanban_avatar_smallbox"/>
+                                                            </t>
+                                                            <t t-if="record.is_company.raw_value === false">
+                                                                <img t-att-src='_s + "/base/static/src/img/avatar.png"' class="oe_kanban_image oe_kanban_avatar_smallbox"/>
+                                                            </t>
+                                                        </t>
+                                                    </a>
+                                                        <div class="oe_module_desc">
+                                                            <div class="oe_kanban_box_content oe_kanban_color_bglight oe_kanban_color_border">
+                                                                <table class="oe_kanban_table">
+                                                                    <tr>
+                                                                        <td class="oe_kanban_title1" align="left" valign="middle">
+                                                                            <h4><a type="open"><field name="name"/></a></h4>
+                                                                            <i><div t-if="record.function.raw_value">
+                                                                                <field name="function"/></div></i>
+                                                                            <div><a t-if="record.email.raw_value" title="Mail" t-att-href="'mailto:'+record.email.value">
+                                                                                <field name="email"/>
+                                                                            </a></div>
+                                                                            <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
+                                                                            <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
+                                                                            <div t-if="record.fax.raw_value">Fax: <field name="fax"/></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+-->
+                            
+                        </notebook>
+                        <separator/>
+                        <separator/>
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <field name="sub_total"  widget='monetary' />
+                            <field name="cuenta_iva" widget='monetary'/>
+                        <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="cuenta_total" /> 
+                                        <button name="button_dummy" string="Calcular"  type="object" icon="terp-sale" class="oe_highlight"/>
+
+                        </div>
+                        <field name="cuenta_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' />
+                        </group>
+                    
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_awning_reservation_tree">
+            <field name="name">awning.reservation.tree</field>
+            <field name="model">awning.reservation</field>
+            <field name="arch" type="xml">
+                <tree string="Reservación" colors="blue:state == 'draft';gray:state == 'done';red:state == 'cancel'">
+                    <field name="reservation_no" string="Reservación No"/>
+                    <field name="partner_id" select="1" string="Cliente"/>
+                    <field name="checkin" string="Fecha de llegada"/>
+                    <field name="checkout" string="Fecha de salida"/>
+                    <field name="state" string="Estado"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_awning_reservation_search">
+            <field name="name">awning.reservation.search</field>
+            <field name="model">awning.reservation</field>
+            <field name="arch" type="xml">
+                <search string="Reservación">
+                    <group string='Filters'>
+                        <filter icon="terp-document-new" domain="[('state','=','draft')]" string="Draft"/>
+                        <filter icon="terp-camera_test" domain="[('state','=','confirm')]" string="Confirm"/>
+                        <filter icon="terp-dialog-close" domain="[('state','=','cancel')]" string="Cancel"/>
+                        <filter icon="terp-check" domain="[('state','=','done')]" string="Done"/>
+                    </group>
+                    <field name="reservation_no"/>
+                    <field name="partner_id" select="1"/>
+                    <field name="checkin"/>
+                    <field name="checkout"/>
+                    <field name="state"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="partner_id" string="Cliente" icon="terp-personal" domain="[]" context="{'group_by':'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_awning_reservation_graph">
+            <field name="name">awning.reservation.graph</field>
+            <field name="model">awning.reservation</field>
+            <field name="arch" type="xml">
+                <graph string="Reservación" type="pie">
+                    <field name="state"/>
+                    <field name="reservation_no"/>
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="awning_calendar_view">
+            <field name="name">awning Reservation</field>
+            <field name="model">awning.reservation</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Current Reservation" date_start="checkin" date_stop= "dummy" color="state" >
+                    <field name="partner_id"/>
+                </calendar>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="awning_gantt_view">
+            <field name="name">awning.gantt</field>
+            <field name="model">awning.reservation</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <gantt date_start="checkin" date_stop="checkout" string="Reservation" default_group_by="partner_id"></gantt>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_awning_reservation_tree_all">
+            <field name="name">Reservaciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">awning.reservation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,gantt</field>
+        </record>
+        <menuitem  id="menu_awning_reservation" name="Reservaciones" parent="toldo.awning_menu" sequence="1"/>
+        <menuitem name="Reservaciones"
+        id="menu_action_awning_reservation_tree_all"
+        action="action_awning_reservation_tree_all"
+        parent="menu_awning_reservation"
+        sequence="3"/>
+        
+       <record model="ir.ui.view" id="awning_reservation_summary_form_view"> 
+             <field name="name">awning.reservation.summary.form</field> 
+             <field name="model">awning.reservation.summary</field> 
+             <field name="arch" type="xml"> 
+                 <form string="Consulta de Toldos" version="7.0"> 
+                     <header> 
+                         <separator string="Consulta de toldos" colspan="4"/> 
+                     </header> 
+                     <sheet> 
+                         <group colspan="4" col="4"> 
+                             <label for="dates_from" string="Periodo de Consulta"/> 
+                             <div> 
+                                 Desde:
+                                 <field name="dates_from" class="oe_inline" on_change="get_awning_summary(dates_from, dates_to)" string="Fecha de llegada"/> 
+                                 Hasta:
+                                 <field name="dates_to" class="oe_inline" on_change="get_awning_summary(dates_from, dates_to)" string="Fecha de salida" /> 
+                             </div> 
+                         </group> 
+                         <notebook> 
+                             <page string="Disponibilidad de Toldos"> 
+                                 <field name="summary_headers" colspan="4" invisible="1"/> 
+                                 <field name="awning_summary" colspan="4" invisible="1"/> 
+                                 <widget type="Awning_Reservation"></widget> 
+                             </page> 
+                         </notebook> 
+                     </sheet> 
+                 </form> 
+             </field> 
+         </record> 
+         
+         <record model="ir.actions.act_window" id="action_awning_reservation_summary"> 
+             <field name="name">awning Reservations Summary</field> 
+             <field name="type">ir.actions.act_window</field> 
+             <field name="res_model">awning.reservation.summary</field> 
+             <field name="view_type">form</field> 
+             <field name="view_mode">form</field> 
+         </record> 
+         <menuitem name="Consultar Disponibilidad de Toldos" 
+         id="menu_action_awning_reservation_summary" 
+         action="action_awning_reservation_summary" 
+         parent="menu_awning_reservation" 
+         sequence="3"/> 
+    </data>
+</openerp>
+

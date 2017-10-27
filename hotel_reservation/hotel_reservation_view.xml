@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+<!--
+        ============================================================
+        Reservation
+        ============================================================ 
+-->
+
+        <record model="ir.ui.view" id="view_hotel_reservation_form">
+            <field name="name">hotel.reservation.form</field>
+            <field name="model">hotel.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Reservación" version="7.0">
+                    <header>
+                        <button name="confirmed_reservation" string="Confirmar" type="object" states="draft"  class="oe_highlight"/>
+                        <button name="cancel_reservation" string="Cancelar" type="object" states="draft,confirm"  class="oe_highlight"/>
+                        <button name="facturar_pagar" string="Pagar" type="object" states="confirm"  class="oe_highlight"/>
+                        <button name="pagar_reserva" string="Pagar" type="object" states="invoiced"  class="oe_highlight"/>
+                        <button name="imprimir_factura" string="Imprimir Factura" type="object" states="paid"  class="oe_highlight"/>
+                        <button name="reservation_done" string="Salida de Clientes" type="object" states="paid"  class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <label string="Reservación No"/>
+                        <h1>
+                            <field name="reservation_no" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group colspan="4" col="4">
+                                <field name="date_order" select="1"/>
+                                <field name="warehouse_id" select="1" invisible="True"/>
+                            </group>
+                            <separator/>
+                            <group colspan="4" col="4">
+                                <field name="partner_id" on_change="onchange_partner_id(partner_id)" select="1" domain="[('customer','=',True)]"/>
+                                <field name="pricelist_id" col="2"/>
+                                <field name="partner_order_id" domain="[('parent_id','=',partner_id)]"/>
+                                <field name="partner_invoice_id" domain="[('parent_id','=',partner_id)]"/>
+                                <field name="partner_shipping_id" domain="[('parent_id','=',partner_id)]"/>
+                            </group>
+                            <group colspan="4" col="4">
+                                <field name="checkin" on_change="on_change_checkin(date_order,checkin,checkout)"/>
+                                <field name="checkout" on_change="on_change_checkout(checkin,checkout)"/>
+                                <field name="dias_hospedaje" readonly='True' />
+                                <field name="adults"/>
+                                <field name="children"/>
+                            </group>
+                            <field name="dummy" invisible="True"/>
+                            <field name="acccount_invoice_id" invisible="True"/>
+                            <field name="verificar_pago" invisible="True"/>
+                        </group>
+                        <notebook>
+                            <page string='Reservation Line'>
+                                <field name="reservation_line" colspan="4" nolabel="1" on_change="on_change_filter(reservation_line)" >
+
+                                    <form string="Reservation Line">
+                                        <separator string="Room Type"/>
+                                        <field name="name" invisible="1" />
+                                        <field name="categ_id" on_change="on_change_categ(categ_id, parent.checkin, parent.checkout)" select="1" colspan="4" nolabel="1" string="tipo"/>
+                                        <newline/>
+                                        <separator string="Seleccionar habitación"/>
+                                        <field name="reserve" colspan="4" on_change="on_change_categ(categ_id, parent.checkin, parent.checkout)" string="Room Number" nolabel="1" ></field>
+                                    </form>
+                                    <tree string="Reservation Line">
+                                        <field name="reserve" colspan="4"  string="Habitaciones"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            
+                             <page string='Servicio de reservación'>
+                                <field name="service_recervation_line" string="Linea de Servicios" colspan="4" nolabel="1" >
+
+                                    <tree string="Reservation Line" editable="botton">
+                                        <field name="categ_id"   nolabel="1" on_change="limpiar_selector()" string="Tipo de Servicio"/>
+                                        <field name="service_id" string="Servicios" domain="[('categ_id','=',categ_id)]">
+                                        </field>
+                                        <field name="product_uom_qty" string="Cantidad" />
+                                    </tree>
+                                </field>
+                            </page>
+<!--
+                             <page string='Huespedes'>
+                                <field name="child_ids" mode="kanban">
+                                    <kanban>
+                                        <field name="color"/>
+                                        <field name="name"/>
+                                        <field name="title"/>
+                                        <field name="email"/>
+                                        <field name="parent_id"/>
+                                        <field name="is_company"/>
+                                        <field name="function"/>
+                                        <field name="phone"/>
+                                        <field name="street"/>
+                                        <field name="street2"/>
+                                        <field name="zip"/>
+                                        <field name="city"/>
+                                        <field name="country_id"/>
+                                        <field name="mobile"/>
+                                        <field name="fax"/>
+                                        <field name="state_id"/>
+                                        <field name="has_image"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                                <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '')" style="position: relative">
+                                                    <a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
+                                                    <div class="oe_module_vignette">
+                                                    <a type="open">
+                                                        <t t-if="record.has_image.raw_value === true">
+                                                            <img t-att-src="kanban_image('res.partner', 'image_small', record.id.value)" class="oe_avatar oe_kanban_avatar_smallbox"/>
+                                                        </t>
+                                                        <t t-if="record.image and record.image.raw_value !== false">
+                                                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_avatar oe_kanban_avatar_smallbox"/>
+                                                        </t>
+                                                        <t t-if="record.has_image.raw_value === false and (!record.image or record.image.raw_value === false)">
+                                                            <t t-if="record.is_company.raw_value === true">
+                                                                <img t-att-src='_s + "/base/static/src/img/company_image.png"' class="oe_kanban_image oe_kanban_avatar_smallbox"/>
+                                                            </t>
+                                                            <t t-if="record.is_company.raw_value === false">
+                                                                <img t-att-src='_s + "/base/static/src/img/avatar.png"' class="oe_kanban_image oe_kanban_avatar_smallbox"/>
+                                                            </t>
+                                                        </t>
+                                                    </a>
+                                                        <div class="oe_module_desc">
+                                                            <div class="oe_kanban_box_content oe_kanban_color_bglight oe_kanban_color_border">
+                                                                <table class="oe_kanban_table">
+                                                                    <tr>
+                                                                        <td class="oe_kanban_title1" align="left" valign="middle">
+                                                                            <h4><a type="open"><field name="name"/></a></h4>
+                                                                            <i><div t-if="record.function.raw_value">
+                                                                                <field name="function"/></div></i>
+                                                                            <div><a t-if="record.email.raw_value" title="Mail" t-att-href="'mailto:'+record.email.value">
+                                                                                <field name="email"/>
+                                                                            </a></div>
+                                                                            <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
+                                                                            <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
+                                                                            <div t-if="record.fax.raw_value">Fax: <field name="fax"/></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+-->
+                        </notebook>
+                        <separator/>
+                        <separator/>
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <field name="sub_total"  widget='monetary' />
+                            <field name="cuenta_iva" widget='monetary'/>
+                        <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="cuenta_total" /> 
+                                        <button name="button_dummy" string="Calcular"  type="object" icon="terp-sale" class="oe_highlight"/>
+
+                        </div>
+                        <field name="cuenta_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' />
+                        </group>
+                    
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_hotel_reservation_tree">
+            <field name="name">hotel.reservation.tree</field>
+            <field name="model">hotel.reservation</field>
+            <field name="arch" type="xml">
+                <tree string="Reservación" colors="blue:state == 'draft';gray:state == 'done'">
+                    <field name="reservation_no"/>
+                    <field name="partner_id" select="1"/>
+                    <field name="checkin"/>
+                    <field name="checkout"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_hotel_reservation_search">
+            <field name="name">hotel.reservation.search</field>
+            <field name="model">hotel.reservation</field>
+            <field name="arch" type="xml">
+                <search string="Reservation">
+                    <group string='Filters'>
+                        <filter icon="terp-document-new" domain="[('state','=','draft')]" string="Draft"/>
+                        <filter icon="terp-camera_test" domain="[('state','=','confirm')]" string="Confirm"/>
+                        <filter icon="terp-dialog-close" domain="[('state','=','cancel')]" string="Cancel"/>
+                        <filter icon="terp-check" domain="[('state','=','done')]" string="Done"/>
+                    </group>
+                    <field name="reservation_no"/>
+                    <field name="partner_id" select="1"/>
+                    <field name="checkin"/>
+                    <field name="checkout"/>
+                    <field name="state"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="partner_id" string="Guest Name" icon="terp-personal" domain="[]" context="{'group_by':'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_hotel_reservation_graph">
+            <field name="name">hotel.reservation.graph</field>
+            <field name="model">hotel.reservation</field>
+            <field name="arch" type="xml">
+                <graph string="Reservation" type="pie">
+                    <field name="state"/>
+                    <field name="reservation_no"/>
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hotel_calendar_view">
+            <field name="name">Room Reservation</field>
+            <field name="model">hotel.reservation</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Current Reservation" date_start="checkin" date_stop= "dummy" color="state" >
+                    <field name="partner_id"/>
+                </calendar>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hotel_gantt_view">
+            <field name="name">hotel.gantt</field>
+            <field name="model">hotel.reservation</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <gantt date_start="checkin" date_stop="checkout" string="Reservation" default_group_by="partner_id"></gantt>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_hotel_reservation_tree_all">
+            <field name="name">Reservations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hotel.reservation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,gantt</field>
+        </record>
+        <menuitem  id="menu_hotel_reservation" name="Reservaciones" parent="hotel.hotel_management_menu" sequence="1"/>
+        <menuitem name="Reservaciones"
+        id="menu_action_hotel_reservation_tree_all"
+        action="action_hotel_reservation_tree_all"
+        parent="menu_hotel_reservation"
+        sequence="3"/>
+<!--
+        <record id="view_hotel_room_form_inherited" model="ir.ui.view">
+            <field name="name">view.hotel.room.form.inherited</field>
+            <field name="model">hotel.room</field>
+            <field name="inherit_id" ref="hotel.view_hotel_room_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Information']" position="after">
+                    <page string = "Room Reservation">
+                        <separator colspan='4' string="Room Reservation Line" />
+                        <field name="room_reservation_line_ids" colspan="4" nolabel='1' >
+                            <form string=" Room line" version="7.0">
+                                <group colspan='4' col='4'>
+                                    <field name="room_id"/>
+                                    <field name="check_in"/>
+                                    <field name="state"/>
+                                    <field name="check_out"/>
+                                    <field name="reservation_id" />
+                                </group>
+                            </form>
+                            <tree>
+                                <field name="room_id"/>
+                                <field name="check_in"/>
+                                <field name="check_out"/>
+                                <field name="state"/>
+                                <field name="reservation_id" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+-->
+        
+        
+       <record model="ir.ui.view" id="room_reservation_summary_form_view"> 
+             <field name="name">room.reservation.summary.form</field> 
+             <field name="model">room.reservation.summary</field> 
+             <field name="arch" type="xml"> 
+                 <form string="Consultar Habitaciones" version="7.0"> 
+                     <header> 
+                         <separator string="Consultar Habitaciones" colspan="4"/> 
+                     </header> 
+                     <sheet> 
+                         <group colspan="4" col="4"> 
+                             <label for="date_from" string="Periodo de Consulta"/> 
+                             <div>
+                                 Desde:
+                                 <field name="date_from" class="oe_inline" on_change="get_room_summary(date_from, date_to)"/> 
+                                 Hasta:  
+                                 <field name="date_to" class="oe_inline" on_change="get_room_summary(date_from, date_to)" /> 
+                             </div> 
+                         </group> 
+                         <notebook> 
+                             <page string="Disponibilidad de Habitaciones"> 
+                                 <field name="summary_header" colspan="4" invisible="1"/> 
+                                 <field name="room_summary" colspan="4" invisible="1"/> 
+                                 <widget type="Room_Reservation"></widget> 
+                             </page> 
+                         </notebook> 
+                     </sheet> 
+                 </form> 
+             </field> 
+         </record> 
+         <record model="ir.actions.act_window" id="action_hotel_reservation_summary"> 
+             <field name="name">Consultar Habitaciones</field> 
+             <field name="type">ir.actions.act_window</field> 
+             <field name="res_model">room.reservation.summary</field> 
+             <field name="view_type">form</field> 
+             <field name="view_mode">form</field> 
+         </record> 
+         <menuitem name="Consultar Disponibilidad de Habitaciones" 
+         id="menu_action_hotel_reservation_summary" 
+         action="action_hotel_reservation_summary" 
+         parent="menu_hotel_reservation" 
+         sequence="3"/> 
+    </data>
+
+</openerp>

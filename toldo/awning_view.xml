@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <openerp>
+     <data>
+		 
+
+<!--
+		 **************MENU***************
+-->
+    <menuitem id="awning_menu" name="Gestion de Toldos" web_icon="data/toldo-grey.png" web_icon_hover="data/toldo-color.png" groups="group_toldo_manager,group_toldo_user,base.group_erp_manager"/>
+    <menuitem id="awning_config_menu" name="Configuracion" sequence="40" parent ="awning_menu"/>		 
+    <menuitem id="awning_reservations_menu" name="Reservaciones de Toldos" sequence="10" parent ="awning_menu"/>	
+    <menuitem id="awning_reports_menu" name="Reportes" sequence="30" parent ="awning_menu"/>	
+    <menuitem id="awning_config_awning_menu" name="Toldos" sequence="20" parent ="awning_config_menu"/>	
+    <menuitem id="awning_config_service_menu" name="Servicios" sequence="30" parent ="awning_config_menu"/>	
+    <menuitem id="awning_otros_menu" name="Otros" sequence="50" parent ="awning_menu"/>		 
+
+<!--
+	     **********************************
+-->
+    
+
+        
+<!--
+    ========================================================
+                                Tipo de toldos
+        ========================================================
+-->
+        <!--========================================================
+                                Awning Type
+        ========================================================-->
+        
+        <record model="ir.ui.view" id="view_toldo_awning_type_form">
+            <field name="name">toldo.awning_type.form</field>
+            <field name="model">toldo.awning.type</field>
+            <field name="arch" type="xml">
+                <form string="Tipos de Toldo" version="7.0">
+                  <sheet>
+                   <group>
+                    <field name="name" select="1" string="Nombre completo"/>
+                    <field name="parent_id" domain="[('isawningtype','=',True)]" widget="selection" select="1" string="Categoría padre"/>
+                   </group>
+                  </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_toldo_awning_type_tree">
+            <field name="name">toldo.awning_type.tree</field>
+            <field name="model">toldo.awning.type</field>
+            <field name="arch" type="xml">
+                <tree string="Tipos de Toldo">
+                    <field name="complete_name" string="Nombre completo"/>
+                    
+                    
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="open_toldo_awning_type_form_tree">
+            <field name="name">Tipo de Toldo</field>
+            <field name="res_model">toldo.awning.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem name="Toldos Tipos"
+                  id="menu_open_toldo_awning_type_form_tree" 
+                  action="open_toldo_awning_type_form_tree"
+                  sequence="20"
+                  parent="awning_config_awning_menu"/>
+                  
+                  
+               
+    <!--===================================================
+                                toldos
+        =================================================== -->
+
+
+<!--
+        ***************************FORM*********************************
+-->
+
+        <record model="ir.ui.view" id="view_toldo_awning_form">
+            <field name="name">toldo.awning.form</field>
+            <field name="model">toldo.awning</field>
+            <field name="arch" type="xml">
+                <form string="Toldos" version="7.0">
+
+                <sheet>
+            <div class="oe_left" style="width: 500px;">
+                <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
+                <div class="oe_title">
+			        <label for="name" string="Nombre" />
+			        <h1>
+			            <field name="name" select="1"/>
+			        </h1>
+			        <label for="status" string="Estatus" />
+			            <field name="status" />
+				</div>
+            </div>
+				<notebook>
+						<page string="Información">
+                            <group colspan="4" col="4">
+                                <field name="categ_id" select="1" domain="[('isawningtype','=',True)]" widget="selection" string="Categoría"/>
+                                <field name="product_manager" select="2" string="Gerente del producto"/>
+                                <field name="uom_id" invisible="1" string="Unidad de medida"/>
+                                <field name="max_adult" value="2" string="Cantidad de adultos"/>
+                                <field name="max_child" value="2" string="Cantidad de niños"/>
+                                <field name="website_published" string="Publicacion Sitio Web"/>
+                            </group>
+                          <newline/>
+                          <separator colspan='4' string="Impuesto proveedor"/>
+                          <field name="supplier_taxes_id" colspan="4" nolabel='1' help='Define supplier taxes if there any on the ty. '/>
+                          <newline/>
+                          <separator colspan='4' string="Impuesto cliente"/>
+                          <field name="taxes_id" colspan="4" nolabel='1' help='Customer taxes apply on the perticular awning. '/>
+                       </page>
+<!--
+                       <page string = "Accesorios para toldos">
+                          <separator string="Accesorios para toldos"/>
+                          <field name="awning_amenities" colspan="4" nolabel="1"/>
+                       </page>
+-->
+                       <page string="Precios">
+                          <group colspan="4" col="4">
+                            <field name="active" select="2" string="Activo"/>
+                            <field name="list_price" string="Precio"/>
+                            <field name="rental" select="2" string="Para alquiler"/>
+                            <field name="standard_price" string="Precio estandar"/>
+                            <field name="uos_id" string="Unidad de medida"/>
+                            <field name="uos_coeff" string="coeficiente de unidad de medida"/>
+                          </group>
+                          <newline/>
+                          <group>
+                            <separator string="Proveedores" />
+                            <field name="seller_ids" colspan="4" nolabel="1" widget="one2many_list"/>
+                          </group>
+                       </page>
+                       <page string="Descripcion">
+                          <separator string="Descripcion" />
+                          <field name="description" colspan="4" nolabel="1" />
+                       </page>
+                </notebook>
+                </sheet>
+                </form>
+            </field>
+        </record>
+        
+<!--
+        ***************************SEARCH*********************************
+-->
+        
+        <record model="ir.ui.view" id="view_toldo_awning_search">
+            <field name="name">toldo.awning.search</field>
+            <field name="model">toldo.awning</field>
+            <field name="arch" type="xml">
+                <search string="Toldos">
+                    <field name="name" string="Nombre"/>
+                    <field name="categ_id" select="1" string="Categoría"/>
+                    <field name="list_price" string="Precio"/>
+
+                    <newline/>
+
+                </search>
+            </field>
+        </record>
+        
+<!--
+        ***************************TREE*********************************
+-->
+
+		<record model="ir.ui.view" id="view_toldo_awning_tree">
+			<field name="name">toldo.awning.tree</field>
+			<field name="model">toldo.awning</field>
+			<field name="arch" type="xml">
+				<tree string="toldos">
+					<field name="name" string="Nombre"/>
+					<field name="categ_id" select="1" string="Categoría"/>
+					<field name="list_price" string="Precio"/>
+					<field name="taxes_id" string="IVA"/>
+					<field name="costo_total" string="Precio Total"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_toldo_awning_form">
+			<field name="name">Toldos</field>
+			<field name="res_model">toldo.awning</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Toldos"
+				  id="menu_open_toldo_awning_form" 
+				  action="action_toldo_awning_form"
+				  sequence="10"
+				  parent="awning_config_awning_menu"/>
+				  
+				  <!--==============================================
+					  *****************Services*********************
+				      ============================================== -->
+				      
+		<record model="ir.ui.view" id="view_awning_service_type_form">
+			<field name="name">awning.service_type.form</field>
+			<field name="model">awning.service.type</field>
+			<field name="arch" type="xml">
+                <form string="Tipo de Servicio" version="7.0">
+                  <sheet>
+                   <group>
+                    <field name="name" select="1" string="Nombre"/>
+                    <field name="parent_id" domain="[('isservicetype','=',True)]" widget="selection" string="Categoría padre"/>
+                   </group>
+                  </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_awning_service_type_tree">
+            <field name="name">awning.service_type.tree</field>
+            <field name="model">awning.service.type</field>
+            <field name="arch" type="xml">
+                <tree string="Tipos de Servicio">
+                    <field name="complete_name" string="Clasif. Categoria"/>
+                    
+                </tree>     
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="open_awning_service_type_form_tree">
+            <field name="name">Tipos de Servicio</field>
+            <field name="res_model">awning.service.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Tipos de Servicio"
+                  id="menu_open_awning_service_type_form_tree" 
+                  action="open_awning_service_type_form_tree"
+                  sequence="20"
+                  parent="awning_config_service_menu"/>
+
+        <record model="ir.ui.view" id="view_awning_services_form">
+            <field name="name">.awning.services.form</field>
+            <field name="model">awning.services</field>
+            <field name="arch" type="xml">
+                <form string="Servicios" version="7.0">
+                <sheet>
+                <h1>
+                    <label string="Servicio" />
+                    <field name="name" select="1"/>
+                </h1>
+                <group>
+                    <field name="default_code" select="1" string="Código por defecto"/>
+                </group>
+                <notebook>
+                        <page string="Información">
+                          <group>
+                          <group colspan="4" col="4">
+                            <field name="type" select="2" string="Tipo"/>
+                            <field name="state" select="2" string="Estado"/>
+                            <field name="categ_id" domain="[('isservicetype','=',True)]" widget="selection" select="1"/>
+                            <field name="product_manager" select="2" string="Gerente de producto"/>
+                            <field name="uom_id" string="Unidad de medida"/>
+                            <field name="uom_po_id" string="Unidad de medida"/>
+                          </group>
+                          </group>
+                            <newline/>
+                            <separator colspan='4' string="Impuestos Proveedor"/>
+                            <field name="supplier_taxes_id" colspan="4" nolabel='1' help='List of supplier taxes related to the service provided by toldo.'/>
+                            <newline/>
+                            <separator colspan='4' string="Impuestos Cliente"/>
+                            <field name="taxes_id" colspan="4" nolabel='1' help='Customer taxes applied on the service.'/>
+                        </page>
+                        <page string="Precios">
+                            <group colspan="4" col="4">
+                                <field name="active" select="2" string="Activo"/>
+                                <field name="list_price" string="Precio"/>
+                                <field name="cost_method" string="Tipo de precio"/>
+                                <field name="sale_ok" select="2" string="Para vender"/>
+                                <field name="standard_price" string="Precio estandar"/>
+                                <field name="rental" select="2" string="Para alquiler"/>
+                                <field name="uos_id" string="Unidad de medida"/>
+                                <field name="uos_coeff" string="Coeficiente de unidad de medida"/>
+                             </group>
+                            <newline/>
+                            <group>
+                                <separator string="Proveedores"/>
+                                <field name="seller_ids" colspan="4" nolabel="1" widget="one2many_list"/>
+                            </group>
+                        </page>
+                        <page string="Descripciones">
+                            <separator string="Descripción" />
+                            <field name="description" colspan="4" nolabel="1" />
+                            <separator string="Descripción de venta"/>
+                            <field name="description_sale" colspan="4" nolabel="1"/>
+                            <separator string="Descripción de compra"/>
+                            <field name="description_purchase" colspan="4" nolabel="1"/>
+                        </page>
+                </notebook>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_awning_services_search">
+            <field name="name">awning.services.search</field>
+            <field name="model">awning.services</field>
+            <field name="arch" type="xml">
+                <search string="Servicios" >
+                    <field name="name" />
+                    <field name="categ_id" select="1"/>
+                    <field name="list_price" string="Service rate"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="categ_id" string="Catagory" icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'categ_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_awning_services_tree">
+            <field name="name">awning.services.tree</field>
+            <field name="model">awning.services</field>
+            <field name="arch" type="xml">
+                <tree string="Servicios" >
+                    <field name="name" string="Nombre" />
+                    <field name="categ_id" select="1" string="Categoria"/>
+                    <field name="list_price" string="Precio"/>
+					<field name="taxes_id" string="IVA"/>
+					<field name="costo_total" string="Total"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_awning_services_form">
+            <field name="name">Servicios</field>
+            <field name="res_model">awning.services</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Servicios"
+                  id="menu_open_awning_services_form" 
+                  action="action_awning_services_form"
+                  sequence="10"
+                  parent="awning_config_service_menu"/>
+				  
+	    <!--=========================================================== 
+	        ******** Categories for awning, Amenities, Services********
+	        =========================================================== -->
+	    
+        <record model="ir.actions.act_window" id="toldo_awning_category_action">
+            <field name="name">Toldos por Categoria</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.category</field>
+            <field name="domain">[('parent_id','=',False),('isawningtype','=',True)]</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="product.product_category_tree_view"/>
+        </record>
+<!--
+        <menuitem name="Toldos por Categoria" 
+                  id="menu_toldo_awning_category_action" 
+                  action="toldo_awning_category_action"
+                  sequence="30"
+                  parent="awning_config_awning_menu"/>
+-->
+
+<!--
+**********************service_category***********************
+-->
+
+        <record model="ir.actions.act_window" id="toldo_service_category_action">
+            <field name="name">Servicios por Categoria</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.category</field>
+            <field name="domain">[('parent_id','=',False),('isservicetype','=',True)]</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="product.product_category_tree_view"/>
+        </record>
+<!--
+        <menuitem name="Servicios por Categoria" 
+                  id="menu_toldo_service_category_action" 
+                  action="toldo_service_category_action"
+                  sequence="30"
+                  parent="awning_config_service_menu"/>
+-->
+    </data>
+</openerp>
+

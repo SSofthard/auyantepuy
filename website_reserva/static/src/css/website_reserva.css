@@ -1,0 +1,61 @@
+.img_carrusel{
+    max-height:400px;
+    margin:auto;
+}
+.example1 {
+    background:#010306;
+}
+div.transbox {
+    background-color: #ffffff;
+    border: 1px solid white;
+    opacity: 0.6;
+    filter: alpha(opacity=10); /* For IE8 and earlier */
+}
+div.borde_blanco {
+    border: 10px solid white;
+}
+.letra_blanca {
+     color: white   ;
+}
+.border_form_input {
+    border-radius: 0px;
+    border: 1px solid #6ac3ff;
+    margin: 0px 0px 25px;
+}
+
+.border_jumbotron {
+    border-radius: 0px;
+}
+.border_button_input {
+    border-radius: 0px;
+    border:None;
+    margin: 0px 0px 25px;
+    background-color: #6ac3ff;
+}
+.scroll-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color:white;
+}
+
+@media (min-width: 768px) {
+    .col-sm-2-2 {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    .col-sm-1-1 {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    .row-images{
+    margin-right: -15px; 
+    margin-left: 75px;
+    }
+    #imagen-izq{
+    margin-left: 15px;
+    }
+    #imagen-der{
+    margin-left: -15px;">
+    }
+}
+@viewport { width: device-width; }
